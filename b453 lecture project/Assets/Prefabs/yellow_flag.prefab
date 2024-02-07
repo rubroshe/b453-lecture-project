@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 460696302909716198}
   - component: {fileID: 5648735693690857063}
   - component: {fileID: 1640224826034979989}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: yellow_flag
   m_TagString: Untagged
   m_Icon: {fileID: 0}

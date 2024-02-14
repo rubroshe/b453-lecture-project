@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 3516678631258042914}
   - component: {fileID: 3957994631839646160}
   - component: {fileID: 1932969742159468559}
-  m_Layer: 0
+  - component: {fileID: -8530152169992580132}
+  - component: {fileID: 8158273209711964108}
+  m_Layer: 15
   m_Name: green_billion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,9 +73,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingLayerID: -2093513449
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 20944aed87c57064291ae612dea9310c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -120,3 +122,47 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.18
+--- !u!50 &-8530152169992580132
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7956923441159438970}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0.17
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &8158273209711964108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7956923441159438970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98344d0ac2062e8469ed39116d4343e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetFlag: {fileID: 2109529080344362255, guid: ea2c9a5c72f8a524ca0ba04790672247, type: 3}
+  maxSpeed: 5
+  acceleration: 0.2
+  decelerationDistance: 3
+  updateTargetInterval: 1

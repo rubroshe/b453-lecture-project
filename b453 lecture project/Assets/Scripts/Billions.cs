@@ -40,7 +40,8 @@ public class Billions : MonoBehaviour
 
         foreach (TeamIdentifier flagIdentifier in allFlags)
         {
-            if (flagIdentifier.teamColor == myTeamColor)
+            // Check for flag type so billion doesn't target itself for movement
+            if (flagIdentifier.isFlag && flagIdentifier.teamColor == myTeamColor)
             {
                 float distance = Vector2.Distance(transform.position, flagIdentifier.transform.position);
                 if (distance < closestDistance)
@@ -73,22 +74,20 @@ public class Billions : MonoBehaviour
     }
 
     private void MoveTowardFlag()
-    {
-        Vector2 direction = (targetFlag.position - transform.position).normalized; // The normalized direction vector towards the flag.
-        float distance = Vector2.Distance(transform.position, targetFlag.position); // The distance from the billion to the target flag.
+    {   // The normalized direction vector towards the flag.   
+        Vector2 direction = (targetFlag.position - transform.position).normalized;
+        // The distance from the billion to the target flag.
+        float distance = Vector2.Distance(transform.position, targetFlag.position);
 
-        // Calculate the speed based on the distance to the flag.
-        // If within the deceleration distance, start slowing down, otherwise accelerate to max speed.
-        float speed = maxSpeed;
-        if (distance < decelerationDistance)
-        {
-            // Slow down smoothly as it approaches the flag.
-            speed = Mathf.Lerp(0, maxSpeed, distance / decelerationDistance);
-        }
+        // Desired speed calculated based on the distance to the flag.
+        // If within the deceleration distance, start slowing down, otherwise accelerate to max speed (GPT)
+        float targetSpeed = (distance < decelerationDistance) ? Mathf.Lerp(0, maxSpeed, distance / decelerationDistance) : maxSpeed;
 
-        // Calculate the amount of force to apply for acceleration or deceleration.
-        Vector2 force = direction * speed * acceleration - rb.velocity;
-        rb.AddForce(force); // Apply the force to the Rigidbody2D component.
+        // The desired velocity is the direction times the target speed.
+        Vector2 targetVelocity = direction * targetSpeed;
+
+        // Smoothly update the velocity towards the target velocity.
+        rb.velocity = Vector2.Lerp(rb.velocity, targetVelocity, acceleration * Time.fixedDeltaTime);
 
         /*// tried using ChatGPT to adjust the rotation of the billion to face the direction of movement.
         if (rb.velocity != Vector2.zero)

@@ -12,5 +12,6 @@ public enum TeamColor
 public class TeamIdentifier : MonoBehaviour
 {
     public TeamColor teamColor;
+    public bool isFlag; // distinguish flags from billions
 }
 

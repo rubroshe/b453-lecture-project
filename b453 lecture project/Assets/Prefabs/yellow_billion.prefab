@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -907654325639669340}
   - component: {fileID: -4192781244111261755}
   - component: {fileID: -657677344029109988}
+  - component: {fileID: 1393457677971223731}
   m_Layer: 15
   m_Name: yellow_billion
   m_TagString: Untagged
@@ -134,10 +135,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98344d0ac2062e8469ed39116d4343e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetFlag: {fileID: 460696302909716198, guid: e70f2c17935025a41ae326777646be96, type: 3}
-  maxSpeed: 4
-  acceleration: 0.2
-  decelerationDistance: 3
+  targetFlag: {fileID: 0}
+  maxSpeed: 5
+  acceleration: 0.4
+  decelerationDistance: 4
   updateTargetInterval: 1
 --- !u!50 &-657677344029109988
 Rigidbody2D:
@@ -152,7 +153,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 0.5
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -165,4 +166,18 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
+--- !u!114 &1393457677971223731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3543173476569341045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7543b4853416634086c6fcce15e1ad5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teamColor: 1
+  isFlag: 0

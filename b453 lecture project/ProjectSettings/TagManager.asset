@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Flag
+  - Billions
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Billions
   - 
   - 
   - 
@@ -43,4 +45,10 @@ TagManager:
     locked: 0
   - name: Line
     uniqueID: 668341909
+    locked: 0
+  - name: Billion
+    uniqueID: 2201453847
+    locked: 0
+  - name: Flag
+    uniqueID: 2714010701
     locked: 0

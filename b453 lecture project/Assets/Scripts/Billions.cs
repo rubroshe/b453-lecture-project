@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Billions : MonoBehaviour
@@ -12,11 +13,29 @@ public class Billions : MonoBehaviour
     private Rigidbody2D rb;
     public float updateTargetInterval = 1f;
 
+    [Header("Health Refs")]
+    public float maxHealth = 100f;
+    public float minHealthCircleSize = 0.4f; // minimum scale of the health circle 
+    public float currentHealth;
+    public SpriteRenderer healthCircle; // this should match billion team color/sprite
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         StartCoroutine(UpdateTargetFlag());
+
+        currentHealth = maxHealth;
+        UpdateHealthVisual();
+    }
+
+    private void Update()
+    {
+        // Check for middle mouse button click
+        if (Input.GetMouseButtonDown(2))
+        {
+            CheckForClickDamage();
+        }
     }
 
     IEnumerator UpdateTargetFlag()
@@ -60,7 +79,7 @@ public class Billions : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("No flags found for " + gameObject.name);
+           // Debug.LogWarning("No flags found for " + gameObject.name);
         }
     }
 
@@ -96,4 +115,50 @@ public class Billions : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }*/
     }
-}
+
+    public void TakeDamage(float damageToTake)
+    {
+        currentHealth -= damageToTake;
+        UpdateHealthVisual();
+        Debug.Log("Ouch!" + " \n " + "-" + gameObject);
+
+        if (currentHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+
+    void UpdateHealthVisual()
+    {
+        if (healthCircle != null)
+        {
+            // calc scale of health circle 
+            float healthRatio = Mathf.Clamp((currentHealth / maxHealth), minHealthCircleSize, 1);
+            healthCircle.transform.localScale = Vector3.one * Mathf.Max(healthRatio, minHealthCircleSize);
+           // healthCircle.transform.localScale = Vector3.one * healthRatio;
+        }
+    }
+
+    void CheckForClickDamage()
+    {
+        // Raycast to the mouse position to see if hit this billion
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity);
+
+        if (hit.collider != null && hit.collider.gameObject == this.gameObject) // check if hit object with this script (billion)
+        {
+            
+            TakeDamage(10f);
+        }
+    }
+
+        /* private void OnMouseDown()
+         {
+             if (Input.GetMouseButtonDown(2)) // check for middle mouse click 
+             {
+                 TakeDamage(10f); 
+             }
+         }*/
+
+    }

@@ -6,6 +6,8 @@ public enum TeamColor
 {
     Green,
     Yellow,
+    Red,
+    Blue
     // Add more team colors as needed
 }
 

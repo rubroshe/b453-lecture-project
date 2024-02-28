@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TurretController : MonoBehaviour
@@ -14,6 +15,7 @@ public class TurretController : MonoBehaviour
         {
             Vector3 targetDirection = nearestOpponent.transform.position - transform.position;
             float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
+          // ****simpler way**** both work turret.transform.up = targetDirection;
             turret.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward); // Assume the sprite is facing up
         }
         // If there's no opponent, you set a default direction or leave it as is
@@ -21,7 +23,7 @@ public class TurretController : MonoBehaviour
 
     GameObject FindNearestOpponent()
     {
-        GameObject[] billions = GameObject.FindGameObjectsWithTag("Billions"); // Make sure all billions have this tag
+        GameObject[] billions = GameObject.FindGameObjectsWithTag("Billions"); // scan for all billions
         GameObject nearestOpponent = null;
         float nearestDistance = Mathf.Infinity;
 

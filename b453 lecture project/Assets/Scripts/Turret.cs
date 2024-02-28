@@ -29,12 +29,12 @@ public class Turret : MonoBehaviour
 
         foreach (Billions billion in allBillions)
         {
-            // Ignore this billion
+            // Ignore the parent billion itself this turret is the child of
             if (billion.gameObject == this.gameObject) continue;
 
             TeamIdentifier billionTeamIdentifier = billion.GetComponent<TeamIdentifier>();
 
-            // Ignore billions on the same team
+            // Ignore billions on the same team color (non-opponents)
             if (billionTeamIdentifier.teamColor == myTeamIdentifier.teamColor) continue;
 
             float distance = Vector2.Distance(transform.position, billion.transform.position);

@@ -19,6 +19,10 @@ public class Billions : MonoBehaviour
     public float currentHealth;
     public SpriteRenderer healthCircle; // this should match billion team color/sprite
 
+    // xp reference 
+    public ExperienceManager experienceManager;
+    public int xpValue = 10; // xp value of this billion when killed
+
     // Start is called before the first frame update
     void Start()
     {
@@ -119,12 +123,17 @@ public class Billions : MonoBehaviour
     public void TakeDamage(float damageToTake)
     {
         currentHealth -= damageToTake;
-        UpdateHealthVisual();
+        
         Debug.Log("Ouch!" + " \n " + "-" + gameObject);
 
         if (currentHealth <= 0)
         {
-            Destroy(gameObject);
+            ExperienceManager.Instance.AddExperience(xpValue);
+            Die();
+        }
+        else
+        {
+            UpdateHealthVisual();
         }
     }
 
@@ -151,6 +160,13 @@ public class Billions : MonoBehaviour
             
             TakeDamage(10f);
         }
+    }
+
+    void Die()
+    {
+
+        if (experienceManager != null) experienceManager.gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 
         /* private void OnMouseDown()

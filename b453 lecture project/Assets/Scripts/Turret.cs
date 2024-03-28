@@ -54,7 +54,7 @@ public class Turret : MonoBehaviour // attach to turret child of each billion
 
         // spawn bullet at turret pos
         GameObject bullet = Instantiate(bulletPrefab, transform.position, rotation);
-        Bullet bulletScript = bullet.GetComponent<Bullet>();
+        BaseBullet bulletScript = bullet.GetComponent<BaseBullet>();
 
         if (bulletScript != null) // Check if the Bullet script is attached to the prefab
         {

@@ -71,7 +71,7 @@ public class BillionBaseTurret : MonoBehaviour // attach to large turret on each
 
         // spawn bullet at turret pos
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, rotation);
-        BillionBaseBullet bulletScript = bullet.GetComponent<BillionBaseBullet>();
+        BaseBullet bulletScript = bullet.GetComponent<BaseBullet>();
 
         if (bulletScript != null) // Check if the Bullet script is attached to the prefab
         {

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2803496722099514700}
   - component: {fileID: -9210970293683181668}
   - component: {fileID: 3017932343717747248}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: blue_bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ MonoBehaviour:
   bulletDamage: 10
   maxTravelDistance: 0
   myTeamColor: 3
-  shooter: {fileID: 0}
+  shooterBase: {fileID: 2965098219915649201, guid: edb001da3280ed14083faa013043bd00, type: 3}
 --- !u!114 &3017932343717747248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,5 +179,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7543b4853416634086c6fcce15e1ad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamColor: 3
+  teamColor: 0
   isFlag: 0

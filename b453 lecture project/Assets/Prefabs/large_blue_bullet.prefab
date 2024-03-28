@@ -166,6 +166,7 @@ MonoBehaviour:
   bulletDamage: 24
   maxTravelDistance: 0
   myTeamColor: 3
+  shooterBase: {fileID: 2965098219915649201, guid: edb001da3280ed14083faa013043bd00, type: 3}
 --- !u!114 &861314756466599524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,5 +179,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7543b4853416634086c6fcce15e1ad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamColor: 3
+  teamColor: 0
   isFlag: 0

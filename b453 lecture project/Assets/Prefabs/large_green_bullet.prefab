@@ -166,6 +166,7 @@ MonoBehaviour:
   bulletDamage: 24
   maxTravelDistance: 0
   myTeamColor: 0
+  shooterBase: {fileID: 5534137671173697138, guid: 820c3d83894313b4ea245f477a4ae310, type: 3}
 --- !u!114 &-8199153424099133334
 MonoBehaviour:
   m_ObjectHideFlags: 0

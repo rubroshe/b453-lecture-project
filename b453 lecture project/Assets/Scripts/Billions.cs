@@ -20,8 +20,8 @@ public class Billions : MonoBehaviour
     public SpriteRenderer healthCircle; // this should match billion team color/sprite
 
     // xp reference 
-    public ExperienceManager experienceManager;
-    public int xpValue = 10; // xp value of this billion when killed
+ //   public ExperienceManager experienceManager;
+   // public int xpValue = 10; // xp value of this billion when killed
 
     // Start is called before the first frame update
     void Start()
@@ -119,23 +119,26 @@ public class Billions : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }*/
     }
-
-    public void TakeDamage(float damageToTake)
+    
+    public bool TakeDamage(float damageToTake, TeamColor opposingHit) // handles hp/death
     {
         currentHealth -= damageToTake;
         
-        Debug.Log("Ouch!" + " \n " + "-" + gameObject);
+       // Debug.Log("Ouch!" + " \n " + "-" + gameObject);
 
         if (currentHealth <= 0)
         {
-            ExperienceManager.Instance.AddExperience(xpValue);
+            Events.billionDeath.Invoke(opposingHit, true);
             Die();
+            return true; // object dead
         }
         else
         {
             UpdateHealthVisual();
+            return false; // object not dead
         }
     }
+
 
 
     void UpdateHealthVisual()
@@ -158,14 +161,13 @@ public class Billions : MonoBehaviour
         if (hit.collider != null && hit.collider.gameObject == this.gameObject) // check if hit object with this script (billion)
         {
             
-            TakeDamage(10f);
+        //    TakeDamage(10f);
         }
     }
 
     void Die()
     {
-
-        if (experienceManager != null) experienceManager.gameObject.SetActive(false);
+       // if (experienceManager != null) experienceManager.gameObject.SetActive(false);
         Destroy(gameObject);
     }
 

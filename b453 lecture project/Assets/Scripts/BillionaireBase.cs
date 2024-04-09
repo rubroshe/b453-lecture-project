@@ -100,13 +100,14 @@ public class BillionaireBase : MonoBehaviour // attach to billion bases (parent)
         UpdateXpBar();
         CheckForLevelUp();
     }
+
     // healthBar.fillAmount = health / maxHealth;
     private void UpdateXpBar()
     {
         Debug.Log("Updating XP bar: " + currentExperience + " / " + experienceToNextLevel);
 
         xpBar.fillAmount = currentExperience / experienceToNextLevel;
-        
+        // reset xp bar if level up
     }
 
     private void CheckForLevelUp()

@@ -11,8 +11,8 @@ public class BaseBullet : MonoBehaviour
     public TeamColor myTeamColor; // set this in inspector for each color bullet prefab
 
     // Define a delegate and event for bullet hit
-    public delegate void BulletHitHandler(BaseBullet bullet, Collider2D collider);
-    public static event BulletHitHandler OnBulletHit;
+  //  public delegate void BulletHitHandler(BaseBullet bullet, Collider2D collider);
+ //   public static event BulletHitHandler OnBulletHit;
 
     public BillionaireBase shooterBase;  // assign in inspector
 

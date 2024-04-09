@@ -10,7 +10,7 @@ public class Bullet : BaseBullet // attach to each team's bullet prefab
     private Vector2 startPosition;
     public TeamColor myTeamColor; // set this in inspector for each color bullet prefab*/
 
-    
+
     /*// Define a delegate and event for bullet hit
     public delegate void BulletHitHandler(Bullet bullet, Collider2D collider);
     public static event BulletHitHandler OnBulletHit;*/
@@ -52,7 +52,7 @@ public class Bullet : BaseBullet // attach to each team's bullet prefab
 
         bulletDamage = 10f;
     }
-
+}
  //   protected override void OnTriggerEnter2D(Collider2D other)
   //  {
         // Fire the event when bullet hits something
@@ -92,4 +92,4 @@ public class Bullet : BaseBullet // attach to each team's bullet prefab
             Destroy(gameObject);
         }*/
    // }
-}
+

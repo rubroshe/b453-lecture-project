@@ -8,6 +8,8 @@ public class Spawner : MonoBehaviour
     public float spawnInterval = 5f; // Time between each spawn
     private float timeSinceLastSpawn;
 
+    [SerializeField] private BillionaireBase thisSpawnersBase;
+
     private void Start()
     {
         timeSinceLastSpawn = spawnInterval; // Start the first spawn after the interval
@@ -27,7 +29,13 @@ public class Spawner : MonoBehaviour
     void SpawnBillion()
     {
         Vector3 spawnPosition = GetSpawnPosition();
-        Instantiate(billionPrefab, spawnPosition, Quaternion.identity);
+        GameObject newBillion = Instantiate(billionPrefab, spawnPosition, Quaternion.identity);
+
+        // Set rank according to the spawner's base
+        int currentRank = thisSpawnersBase.baseRank;
+
+        // set the rank of the billion
+        // visual script ref here
     }
 
     float GetRandomOffset(float min, float max) // similar to random.range

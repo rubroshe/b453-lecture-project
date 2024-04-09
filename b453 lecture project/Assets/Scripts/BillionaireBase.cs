@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements.Experimental;
 using UnityEngine.UI;
+using TMPro;
 
 public class BillionaireBase : MonoBehaviour // attach to billion bases (parent) 
 {
@@ -10,7 +11,9 @@ public class BillionaireBase : MonoBehaviour // attach to billion bases (parent)
     public float currentHealth;
     public Image xpBar;
     public float currentExperience = 0;
-    private float experienceToNextLevel = 1000; // Example value
+    private float experienceToNextLevel = 500; // Example value
+    public int baseRank = 1; // base rank
+    public TextMeshProUGUI rankText;
 
     public HealthBarManager healthBarManager; // assign this from the inspector
 
@@ -26,6 +29,7 @@ public class BillionaireBase : MonoBehaviour // attach to billion bases (parent)
         currentHealth = maxHealth;
         // UpdateHealthVisual();
         xpBar.fillAmount = 0f;
+        rankText.text = baseRank.ToString();
     }
     public bool TakeDamage(float damageToTake, TeamColor opposingHit)
     {
@@ -112,22 +116,18 @@ public class BillionaireBase : MonoBehaviour // attach to billion bases (parent)
 
     private void CheckForLevelUp()
     {
+        // Check if the current experience is enough to level up
         while (currentExperience >= experienceToNextLevel)
         {
-            currentExperience -= experienceToNextLevel;
+            // Subtract the experience needed for the level up and increase rank
+            currentExperience -= experienceToNextLevel; 
+            baseRank++;
             experienceToNextLevel += 500; // Adjust level-up threshold as needed
-            LevelUp();
+
+            // update rank text
+            rankText.text = baseRank.ToString();
         }
         // Update the XP bar in case of multiple level-ups
         UpdateXpBar();
-    }
-
-    private void LevelUp()
-    {
-        currentExperience -= experienceToNextLevel;
-        experienceToNextLevel += 500; // Increase the XP needed for next level, example increment
-        UpdateXpBar();
-
-        // Additional logic for leveling up, such as increasing stats, etc.
     }
 }

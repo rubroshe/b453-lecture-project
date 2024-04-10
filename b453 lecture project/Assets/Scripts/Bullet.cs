@@ -1,9 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Bullet : BaseBullet // attach to each team's bullet prefab
 {
+      private static float baseDamage = 10f; // default for this bullet type
+
+    // separate modifiers for each team color:
+    private static Dictionary<TeamColor, float> damageModifiers = new Dictionary<TeamColor, float>
+    {
+        {TeamColor.Red, 0f},
+        {TeamColor.Blue, 0f},
+        {TeamColor.Green, 0f},
+        {TeamColor.Yellow, 0f}
+    };
+
+    public static void UpdateDamageModifier(int rank, TeamColor teamColor)
+    {
+        if (damageModifiers.ContainsKey(teamColor))
+        {
+            damageModifiers[teamColor] = (rank / 1.5f) * 10f;
+        }
+    }
+
+    private void Awake()
+    {
+        if (damageModifiers.ContainsKey(myTeamColor))
+        {
+            bulletDamage = baseDamage + damageModifiers[myTeamColor];
+        }
+    }
+    //  private static float upgradedDamage = originalBulletDamage; // Static to retain across instances
+
     /*public Vector2 velocity;
     public float bulletDamage = 10f;
     public float maxTravelDistance; 
@@ -38,8 +67,11 @@ public class Bullet : BaseBullet // attach to each team's bullet prefab
          }
      }
  */
+
     private void Start()
     {
+     //   Events.rankChange.AddListener(UpdateBulletDamage);
+
         BillionaireBase[] allBillionBases = FindObjectsOfType<BillionaireBase>();
         foreach (BillionaireBase baseObj in allBillionBases)
         {
@@ -49,9 +81,15 @@ public class Bullet : BaseBullet // attach to each team's bullet prefab
                 return;
             }
         }
-
-        bulletDamage = 10f;
     }
+
+
+
+    /*private void UpdateBulletDamage(int rank, TeamColor team)
+    {
+        upgradedDamage = originalBulletDamage + (rank / 1.5f) * 10f;
+        bulletDamage = upgradedDamage; // apply immediately to this 
+    }*/
 }
  //   protected override void OnTriggerEnter2D(Collider2D other)
   //  {

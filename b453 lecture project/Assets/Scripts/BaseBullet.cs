@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BaseBullet : MonoBehaviour
 {
     public Vector2 velocity;
-    public float bulletDamage; // = 10f; for bullet, 24f for base bullet
+    protected float bulletDamage; // = 10f; for bullet, 24f for base bullet
     public float maxTravelDistance;
     private Vector2 startPosition;
     public TeamColor myTeamColor; // set this in inspector for each color bullet prefab
@@ -15,6 +16,7 @@ public class BaseBullet : MonoBehaviour
  //   public static event BulletHitHandler OnBulletHit;
 
     public BillionaireBase shooterBase;  // assign in inspector
+
 
     public void Initialize(Vector2 direction, float speed, float maxDistance, TeamColor teamColor)
     {
@@ -56,6 +58,7 @@ public class BaseBullet : MonoBehaviour
               {
                   // Damage logic
                   other.GetComponent<Billions>().TakeDamage(bulletDamage, myTeamColor);
+                   Debug.Log("Bullet hit a billion for " + bulletDamage + " damage!");
               }
 
               // If the BillionaireBase component exists on hit object, deal damage
@@ -63,10 +66,12 @@ public class BaseBullet : MonoBehaviour
               {
                   // Damage logic
                   other.GetComponent<BillionaireBase>().TakeDamage(bulletDamage, myTeamColor);
+                Debug.Log("Bullet hit a base for " + bulletDamage + " damage!");
               }
 
               // Destroy the bullet regardless if damage was dealt
               Destroy(gameObject);
+           //   Events.rankChange.RemoveAllListeners();
 
           }
           else if (other.CompareTag("Wall")) // You need to tag your walls with "Wall"

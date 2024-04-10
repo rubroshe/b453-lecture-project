@@ -10,9 +10,10 @@ public class BillionRankVisual : MonoBehaviour
     private void Start()
     {
         UpdateVisualRank();
+        Events.rankChange.AddListener(SetRank);
     }
 
-    public void SetRank(int newRank)
+    public void SetRank(int newRank, TeamColor team)
     {
         rank = newRank;
         UpdateVisualRank();

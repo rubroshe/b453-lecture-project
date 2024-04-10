@@ -108,7 +108,7 @@ public class BillionaireBase : MonoBehaviour // attach to billion bases (parent)
     // healthBar.fillAmount = health / maxHealth;
     private void UpdateXpBar()
     {
-        Debug.Log("Updating XP bar: " + currentExperience + " / " + experienceToNextLevel);
+    //    Debug.Log("Updating XP bar: " + currentExperience + " / " + experienceToNextLevel);
 
         xpBar.fillAmount = currentExperience / experienceToNextLevel;
         // reset xp bar if level up
@@ -126,6 +126,14 @@ public class BillionaireBase : MonoBehaviour // attach to billion bases (parent)
 
             // update rank text
             rankText.text = baseRank.ToString();
+
+            // refresh health with new maximum 
+            maxHealth += 100;
+            currentHealth = maxHealth;
+            UpdateHealthVisual();
+
+            Events.rankChange.Invoke(baseRank, GetComponent<TeamIdentifier>().teamColor);
+            Debug.Log("rankup event fired");
         }
         // Update the XP bar in case of multiple level-ups
         UpdateXpBar();

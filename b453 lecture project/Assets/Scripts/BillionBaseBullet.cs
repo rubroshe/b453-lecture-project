@@ -4,6 +4,36 @@ using UnityEngine;
 
 public class BillionBaseBullet : BaseBullet
 { // attach to each big bullet prefab
+     private static float baseDamage = 24f; // default for this bullet type
+    // separate modifiers for each team color:
+    private static Dictionary<TeamColor, float> damageModifiers = new Dictionary<TeamColor, float>
+    {
+        {TeamColor.Red, 0f},
+        {TeamColor.Blue, 0f},
+        {TeamColor.Green, 0f},
+        {TeamColor.Yellow, 0f}
+    };
+
+
+    public static void UpdateDamageModifier(int rank, TeamColor teamColor)
+    {
+        if (damageModifiers.ContainsKey(teamColor))
+        {
+            damageModifiers[teamColor] = (rank / 1.5f) * 10f;
+        }
+    }
+
+    private void Awake()
+    {
+        if (damageModifiers.ContainsKey(myTeamColor))
+        {
+            bulletDamage = baseDamage + damageModifiers[myTeamColor];
+        }
+    }
+
+    // private static float originalBulletDamage = 24f; // default for this bullet type
+    //   private static float upgradedDamage = originalBulletDamage; // Static to retain across instances
+
     /*  public Vector2 velocity;
       public float bulletDamage = 24f;
       public float maxTravelDistance;
@@ -37,7 +67,7 @@ public class BillionBaseBullet : BaseBullet
           }
       }
   */
-    
+
     /*// Define a delegate and event for bullet hit
     public delegate void BulletHitHandler(BillionBaseBullet bullet, Collider2D collider);
     public static event BulletHitHandler OnBulletHit;
@@ -45,6 +75,8 @@ public class BillionBaseBullet : BaseBullet
 
     private void Start()
     {
+      //  Events.rankChange.AddListener(UpdateBulletDamage);
+
         BillionaireBase[] allBillionBases = FindObjectsOfType<BillionaireBase>();
         foreach (BillionaireBase baseObj in allBillionBases)
         {
@@ -54,10 +86,13 @@ public class BillionBaseBullet : BaseBullet
                 return;
             }
         }
-
-        bulletDamage = 24f;
     }
 
+   /* private void UpdateBulletDamage(int rank, TeamColor team)
+    {
+        bulletDamage = 24f * (rank / 1.5f);
+    }
+*/
    // protected override void OnTriggerEnter2D(Collider2D other)
   //  {
         // add logic for going "through" billion bullets

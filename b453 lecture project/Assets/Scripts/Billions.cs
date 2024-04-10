@@ -31,7 +31,22 @@ public class Billions : MonoBehaviour
 
         currentHealth = maxHealth;
         UpdateHealthVisual();
+
+        Events.rankChange.AddListener(HandleRankChange); // REMEMBER TO REMOVE LISTENER WHEN DEAD!!
     }
+
+    // The listener method
+    private void HandleRankChange(int rank, TeamColor team)
+    {
+        // Check if the team matches this object's team before applying changes
+        if (GetComponent<TeamIdentifier>().teamColor == team)
+        {
+            // Update the rank health
+            maxHealth = maxHealth + ((rank * 0.25f) * 1000f);
+            currentHealth = maxHealth;
+        }
+    }
+
 
     private void Update()
     {
@@ -169,6 +184,7 @@ public class Billions : MonoBehaviour
     {
        // if (experienceManager != null) experienceManager.gameObject.SetActive(false);
         Destroy(gameObject);
+        Events.rankChange.RemoveListener(HandleRankChange); // remove listener when dead
     }
 
         /* private void OnMouseDown()

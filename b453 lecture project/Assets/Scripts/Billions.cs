@@ -19,6 +19,8 @@ public class Billions : MonoBehaviour
     public float currentHealth;
     public SpriteRenderer healthCircle; // this should match billion team color/sprite
 
+  //  public static float upgradedHealth;
+
     // xp reference 
  //   public ExperienceManager experienceManager;
    // public int xpValue = 10; // xp value of this billion when killed
@@ -42,7 +44,7 @@ public class Billions : MonoBehaviour
         if (GetComponent<TeamIdentifier>().teamColor == team)
         {
             // Update the rank health
-            maxHealth = maxHealth + ((rank * 0.25f) * 1000f);
+            maxHealth = maxHealth + ((rank * 0.25f) * 1000f); // this upgrades health of all teams on accident
             currentHealth = maxHealth;
         }
     }

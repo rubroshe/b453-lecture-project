@@ -8,11 +8,24 @@ public class Spawner : MonoBehaviour
     public float spawnInterval = 5f; // Time between each spawn
     private float timeSinceLastSpawn;
 
+    private int currentRank = 0;
+
     [SerializeField] private BillionaireBase thisSpawnersBase;
 
     private void Start()
     {
         timeSinceLastSpawn = spawnInterval; // Start the first spawn after the interval
+        Events.rankChange.AddListener(HandleRankChange);
+    }
+
+    private void HandleRankChange(int newRank, TeamColor team)
+    {
+        // Check if this spawner's team matches the event's team
+        TeamIdentifier myTeamIdentifier = GetComponent<TeamIdentifier>();
+        if (myTeamIdentifier.teamColor == team)
+        {
+            currentRank = newRank;
+        }
     }
 
     private void Update()
@@ -21,21 +34,18 @@ public class Spawner : MonoBehaviour
 
         if (timeSinceLastSpawn >= spawnInterval)
         {
-            SpawnBillion();
+            SpawnBillion(currentRank);
             timeSinceLastSpawn = 0f;
         }
     }
 
-    void SpawnBillion()
+    void SpawnBillion(int rank)
     {
         Vector3 spawnPosition = GetSpawnPosition();
         GameObject newBillion = Instantiate(billionPrefab, spawnPosition, Quaternion.identity);
 
         // Set rank according to the spawner's base
         int currentRank = thisSpawnersBase.baseRank;
-
-        // set the rank of the billion
-        // visual script ref here
     }
 
     float GetRandomOffset(float min, float max) // similar to random.range

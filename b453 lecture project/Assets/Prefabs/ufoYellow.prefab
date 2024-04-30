@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7543b4853416634086c6fcce15e1ad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamColor: 0
+  teamColor: 1
   isFlag: 0
 --- !u!114 &6767833337520628557
 MonoBehaviour:

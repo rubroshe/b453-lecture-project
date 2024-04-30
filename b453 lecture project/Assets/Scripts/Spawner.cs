@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
@@ -8,7 +9,7 @@ public class Spawner : MonoBehaviour
     public float spawnInterval = 5f; // Time between each spawn
     private float timeSinceLastSpawn;
 
-    private int currentRank = 0;
+    [SerializeField] private int currentRank = 0;
 
     [SerializeField] private BillionaireBase thisSpawnersBase;
 
@@ -25,11 +26,14 @@ public class Spawner : MonoBehaviour
         if (myTeamIdentifier.teamColor == team)
         {
             currentRank = newRank;
+            // get billion prefab TextMeshPro 
+        // failed experiment:    billionPrefab.GetComponentInChildren<TextMeshPro>().text = newRank.ToString();
         }
     }
 
     private void Update()
     {
+        int spawnedBillionRank = thisSpawnersBase.baseRank;
         timeSinceLastSpawn += Time.deltaTime;
 
         if (timeSinceLastSpawn >= spawnInterval)
@@ -42,10 +46,20 @@ public class Spawner : MonoBehaviour
     void SpawnBillion(int rank)
     {
         Vector3 spawnPosition = GetSpawnPosition();
+        // change rank of the billion before spawning it in
+        // ...billionPrefab .... = spawnedBillionRank;
         GameObject newBillion = Instantiate(billionPrefab, spawnPosition, Quaternion.identity);
 
         // Set rank according to the spawner's base
-        int currentRank = thisSpawnersBase.baseRank;
+        Billions billionComponent = newBillion.GetComponent<Billions>();
+        if (billionComponent != null)
+        {
+            billionComponent.SetRank(thisSpawnersBase.baseRank);
+        }
+        else
+        {
+            Debug.LogError("Failed to find Billion component on the new billion instance.");
+        }
     }
 
     float GetRandomOffset(float min, float max) // similar to random.range

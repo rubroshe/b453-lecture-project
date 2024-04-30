@@ -54,3 +54,6 @@ TagManager:
   - name: Flag
     uniqueID: 2714010701
     locked: 0
+  - name: New Layer 4
+    uniqueID: 1398143763
+    locked: 0

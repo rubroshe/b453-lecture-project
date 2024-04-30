@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -12,19 +14,56 @@ public class Billions : MonoBehaviour
 
     private Rigidbody2D rb;
     public float updateTargetInterval = 1f;
+    public int baseRank = 0;
+    public TextMeshProUGUI rankText;
+
 
     [Header("Health Refs")]
     public float maxHealth = 100f;
     public float minHealthCircleSize = 0.4f; // minimum scale of the health circle 
     public float currentHealth;
     public SpriteRenderer healthCircle; // this should match billion team color/sprite
+    
 
-  //  public static float upgradedHealth;
+    //  public static float upgradedHealth;
 
     // xp reference 
- //   public ExperienceManager experienceManager;
-   // public int xpValue = 10; // xp value of this billion when killed
+    //   public ExperienceManager experienceManager;
+    // public int xpValue = 10; // xp value of this billion when killed
 
+
+    // separate HEALTH modifiers for each team color:
+    private static Dictionary<TeamColor, float> billionHealthModifiers = new Dictionary<TeamColor, float>
+    {
+        {TeamColor.Red, 0f},
+        {TeamColor.Blue, 0f},
+        {TeamColor.Green, 0f},
+        {TeamColor.Yellow, 0f}
+    };
+
+    public static void UpdateHealthModifier(int rank, TeamColor teamColor)
+    {
+        if (billionHealthModifiers.ContainsKey(teamColor))
+        {
+            billionHealthModifiers[teamColor] = rank * 20f;
+     //       baseRank++;
+       //     Debug.Log("Rank changed for team " + teamColor + " to " + baseRank);
+        }
+    }
+
+    private void Awake()
+    {
+        if (billionHealthModifiers.ContainsKey(GetComponent<TeamIdentifier>().teamColor))
+        {
+            maxHealth = maxHealth + billionHealthModifiers[GetComponent<TeamIdentifier>().teamColor];
+        }
+    }
+
+    public void SetRank (int newRank) // for keeping up with billion rank text
+    {
+        baseRank = newRank;
+        rankText.text = baseRank.ToString();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +74,8 @@ public class Billions : MonoBehaviour
         UpdateHealthVisual();
 
         Events.rankChange.AddListener(HandleRankChange); // REMEMBER TO REMOVE LISTENER WHEN DEAD!!
+ //  moved to  SetRank method     rankText.text = baseRank.ToString();
+        
     }
 
     // The listener method
@@ -43,12 +84,10 @@ public class Billions : MonoBehaviour
         // Check if the team matches this object's team before applying changes
         if (GetComponent<TeamIdentifier>().teamColor == team)
         {
-            // Update the rank health
-            maxHealth = maxHealth + ((rank * 0.25f) * 1000f); // this upgrades health of all teams on accident
-            currentHealth = maxHealth;
+           // baseRank++;
+         //   Debug.Log("Rank changed for team " + team + " to " + baseRank);
         }
     }
-
 
     private void Update()
     {

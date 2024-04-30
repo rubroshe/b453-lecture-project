@@ -7,7 +7,7 @@ using TMPro;
 
 public class BillionaireBase : MonoBehaviour // attach to billion bases (parent) 
 {
-    public float maxHealth = 300f;
+    public float maxHealth = 400f;
     public float currentHealth;
     public Image xpBar;
     public float currentExperience = 0;
@@ -30,6 +30,11 @@ public class BillionaireBase : MonoBehaviour // attach to billion bases (parent)
         // UpdateHealthVisual();
         xpBar.fillAmount = 0f;
         rankText.text = baseRank.ToString();
+    }
+
+    private void Update()
+    {
+        UpdateHealthVisual();
     }
     public bool TakeDamage(float damageToTake, TeamColor opposingHit)
     {
@@ -128,7 +133,7 @@ public class BillionaireBase : MonoBehaviour // attach to billion bases (parent)
             rankText.text = baseRank.ToString();
 
             // refresh health with new maximum 
-            maxHealth += 100;
+            maxHealth += 125;
             currentHealth = maxHealth;
             UpdateHealthVisual();
 

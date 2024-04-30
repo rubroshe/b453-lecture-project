@@ -378,6 +378,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   billionPrefab: {fileID: 2934476913620796046, guid: 9a16e3ff38a5ed345befc696bc4b18ab, type: 3}
   spawnInterval: 5
+  currentRank: 0
   thisSpawnersBase: {fileID: 2965098219915649201}
 --- !u!114 &3317984607028807608
 MonoBehaviour:
@@ -420,7 +421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c31503a2d48b5eb4aa0c79aacd599788, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 300
+  maxHealth: 400
   currentHealth: 0
   xpBar: {fileID: 6812428689764756869}
   currentExperience: 0

@@ -107,6 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   billionPrefab: {fileID: 3543173476569341045, guid: d1f42afb7e8ddba48a5fda6fd8800144, type: 3}
   spawnInterval: 5
+  currentRank: 0
   thisSpawnersBase: {fileID: 370699589944568983}
 --- !u!58 &6779951809369073276
 CircleCollider2D:
@@ -184,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c31503a2d48b5eb4aa0c79aacd599788, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 300
+  maxHealth: 400
   currentHealth: 0
   xpBar: {fileID: 4826741508591438776}
   currentExperience: 0
